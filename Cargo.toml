@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "windower",
+    "gui_examples"
+]
