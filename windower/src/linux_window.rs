@@ -82,29 +82,42 @@ impl LinuxWindow {
     fn render_loop_linux(&self) {
         self.listen_for_wm_close_event();
         loop {
-            let event = self.connection.wait_for_event();
-            match event {
-                None => { break; }
-                Some(event) => {
-                    let _response_type = event.response_type();
+            // block until an event or error or io error occurs
+            let event = self.connection.wait_for_event().unwrap();
+            match event.response_type() & !0x80 {
+                xcb::KEY_PRESS => {
+                    // we break so that the window closes when a key is pressed
+                    break;
+                },
+                _ => {
+                    // for every other event we do nothing for the moment
                 }
             }
+            // write our changes to the window
+            self.connection.flush();
         }
+        xcb::destroy_window(&self.connection, self.window_id);
     }
 
     fn listen_for_wm_close_event(&self) {
+        // get "cookies" needed to handle the window manager events such as DELETE (which closes the window)
         let wm_delete_cookie = xcb::intern_atom(&self.connection, false, "WM_DELETE_WINDOW");
         let wm_protocols_cookie = xcb::intern_atom(&self.connection, false, "WM_PROTOCOLS");
 
-        let _wm_delete_reply = match wm_delete_cookie.get_reply() {
+        let wm_delete_reply = match wm_delete_cookie.get_reply() {
             Ok(wm_delete_reply) => wm_delete_reply.atom(),
             Err(_) => panic!("could not load WM_PROTOCOLS atom")
         };
 
-        let _wm_protocols_reply = match wm_protocols_cookie.get_reply() {
+        let wm_protocols_reply = match wm_protocols_cookie.get_reply() {
             Ok(wm_protocols_reply) => wm_protocols_reply.atom(),
             Err(_) => panic!("could not load WM_DELETE_WINDOW atom")
         };
+
+        // register to listen for the window closed event
+        let data = [ wm_delete_reply ];
+        xcb::change_property(&self.connection, xcb::PROP_MODE_REPLACE as u8, self.window_id, wm_protocols_reply, 4, 32, &data);
+
     }
 }
 
