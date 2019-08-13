@@ -1,11 +1,10 @@
 use xcb;
-use crate::window::Window;
+use crate::window::{Window, WindowConfig};
 
 #[cfg(unix)]
 #[allow(dead_code)]
 pub struct LinuxWindow {
-    width: i32,
-    height: i32,
+    config: WindowConfig,
     connection: xcb::Connection,
     screen_num: i32,
     window_id: u32,
@@ -13,7 +12,7 @@ pub struct LinuxWindow {
 
 
 impl LinuxWindow {
-    fn create_linux_window(width: i32, height: i32) -> Self {
+    fn create_linux_window(config: WindowConfig) -> Self {
         // connect to the x server
         let (connection, screen_num) = xcb::Connection::connect(None).unwrap();
 
@@ -30,7 +29,7 @@ impl LinuxWindow {
         let event_masks = (xcb::CW_EVENT_MASK, xcb::EVENT_MASK_EXPOSURE | xcb::EVENT_MASK_KEY_PRESS);
 
         // specify the background color
-        let background_value = (xcb::CW_BACK_PIXEL, screen.white_pixel());
+        let background_value = (xcb::CW_BACK_PIXEL, screen.black_pixel());
         
         // we package up the configuration values that will be send to the window
         let values = [
@@ -45,7 +44,7 @@ impl LinuxWindow {
             window_id, 
             screen.root(), 
             0, 0, 
-            width as u16, height as u16,
+            config.width as u16, config.height as u16,
             10, 
             xcb::WINDOW_CLASS_INPUT_OUTPUT as u16,
             screen.root_visual(),
@@ -63,8 +62,7 @@ impl LinuxWindow {
             title.as_bytes());
 
         LinuxWindow {
-            width: width,
-            height: height,
+            config: config,
             connection: connection,
             screen_num: screen_num,
             window_id: window_id
@@ -80,14 +78,24 @@ impl LinuxWindow {
     }
 
     fn render_loop_linux(&self) {
-        self.listen_for_wm_close_event();
+        let (wm_delete, _wm_protocols) = self.listen_for_wm_close_event();
         loop {
             // block until an event or error or io error occurs
             let event = self.connection.wait_for_event().unwrap();
             match event.response_type() & !0x80 {
                 xcb::KEY_PRESS => {
                     // we break so that the window closes when a key is pressed
+                    println!("A key was pressed and we are closing things for now");
                     break;
+                },
+                xcb::CLIENT_MESSAGE => {
+                    let cm = unsafe {
+                        xcb::cast_event::<xcb::ClientMessageEvent>(&event)
+                    };
+                    if cm.data().data32()[0] == wm_delete {
+                        println!("Closing the app due to the X button being hit");
+                        break;
+                    }
                 },
                 _ => {
                     // for every other event we do nothing for the moment
@@ -99,7 +107,7 @@ impl LinuxWindow {
         xcb::destroy_window(&self.connection, self.window_id);
     }
 
-    fn listen_for_wm_close_event(&self) {
+    fn listen_for_wm_close_event(&self) -> (u32, u32) {
         // get "cookies" needed to handle the window manager events such as DELETE (which closes the window)
         let wm_delete_cookie = xcb::intern_atom(&self.connection, false, "WM_DELETE_WINDOW");
         let wm_protocols_cookie = xcb::intern_atom(&self.connection, false, "WM_PROTOCOLS");
@@ -118,13 +126,14 @@ impl LinuxWindow {
         let data = [ wm_delete_reply ];
         xcb::change_property(&self.connection, xcb::PROP_MODE_REPLACE as u8, self.window_id, wm_protocols_reply, 4, 32, &data);
 
+        (wm_delete_reply, wm_protocols_reply)
     }
 }
 
 
 impl Window for LinuxWindow {
-    fn create(width: i32, height: i32) -> Self {
-        LinuxWindow::create_linux_window(width, height)
+    fn create(config: WindowConfig) -> Self {
+        LinuxWindow::create_linux_window(config)
     }
 
     fn show(&self) -> String {

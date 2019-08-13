@@ -9,12 +9,12 @@ pub mod window;
 #[cfg(unix)]
 pub mod linux_window;
 
-use window::Window;
+use window::{Window, WindowConfig};
 
 
-pub fn create_window(width: i32, height: i32) -> impl Window {
+pub fn create_window(config: WindowConfig) -> impl Window {
     if cfg!(unix) {
-        linux_window::LinuxWindow::create(width, height)
+        linux_window::LinuxWindow::create(config)
     }
     else if cfg!(windows) {
         panic!("Platform not supported yet");
