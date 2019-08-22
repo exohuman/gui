@@ -1,6 +1,8 @@
 [workspace]
 
 members = [
+    "rusted_vulkans_sys",
+    "rusted_vulkans",
     "windower",
     "gui_examples"
 ]
