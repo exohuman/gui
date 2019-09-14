@@ -5,7 +5,12 @@
 #![allow(unused_macros)]
 #![feature(process_exitcode_placeholder)]
 #![feature(termination_trait_lib)]
+// #![feature(const_generics)]
 
+#[cfg(windows)]
+extern crate winapi;
+use winapi::um::winnt::*;
+use winapi::shared::minwindef::*;
 
 use std::process::{self, Termination};
 

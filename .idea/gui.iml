@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/gui_examples/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gui_examples/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gui_examples\tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/gui_examples\benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans\examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans\tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans\benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans_sys/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans_sys\examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans_sys\tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rusted_vulkans_sys\benches" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/windower/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/windower\examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/windower\tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/windower\benches" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/gui_examples\target" />
+      <excludeFolder url="file://$MODULE_DIR$/rusted_vulkans\target" />
+      <excludeFolder url="file://$MODULE_DIR$/rusted_vulkans_sys\target" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/windower\target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -7,7 +7,9 @@ fn main() {
     let window = create_window(WindowConfig {
         width: 640, 
         height: 480,
-        default_bg_color: 0
+        default_bg_color: 0,
+        application_name: "Basic Window\0",
+        title: "Basic Window\0",
     });
     window.show();
     window.render_loop();

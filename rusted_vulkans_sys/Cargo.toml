@@ -11,4 +11,8 @@ edition = "2018"
 
 
 [build-dependencies]
-bindgen = "0.51"
+bindgen = "*"
+
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winnt", "commdlg", "minwindef"] }

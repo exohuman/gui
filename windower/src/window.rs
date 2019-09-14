@@ -3,7 +3,9 @@
 pub struct WindowConfig {
     pub width: i32,
     pub height: i32,
-    pub default_bg_color: u32
+    pub default_bg_color: u32,
+    pub application_name: &'static str,
+    pub title: &'static str,
 }
 
 
@@ -13,4 +15,5 @@ pub trait Window {
     fn show(&self) -> String;
     fn render_loop(&self);
 }
+
 
