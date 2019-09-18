@@ -13,36 +13,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72f2ce67-d740-40dd-9cf3-e22a46ad4b83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jerom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gui.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/windower/src/windows_window.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/examples/basic_window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/examples/basic_window.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/src/demo.rs" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/src/demo.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui_examples/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/gui_examples/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rusted_vulkans/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans/Cargo.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rusted_vulkans/src/vulkan1_1/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gui.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rusted_vulkans/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rusted_vulkans_sys/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans_sys/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rusted_vulkans_sys/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans_sys/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rusted_vulkans_sys/build.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans_sys/build.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rusted_vulkans_sys/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans_sys/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rusted_vulkans_sys/wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/rusted_vulkans_sys/wrapper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windower/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/windower/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windower/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/windower/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windower/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/windower/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windower/src/linux_window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/windower/src/linux_window.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windower/src/window.rs" beforeDir="false" afterPath="$PROJECT_DIR$/windower/src/window.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +30,19 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Jerome Stepp &lt;exohuman@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -65,7 +54,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$VULKAN_PATH$/Include/vulkan/vk_platform.h" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -76,6 +65,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="language.rust.rustfmt" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\jerom\Projects\rusty\gui\rusted_vulkans\src\vulkan1_1" />
+      <recent name="D:\Users\jerom\Projects\rusty\gui\windower\src" />
+      <recent name="D:\Users\jerom\Projects\rusty\gui\rusted_vulkans\src" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -96,7 +92,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Cargo Command.clean">
+  <component name="RunManager" selected="Cargo Command.run">
     <configuration name="build" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="build " />
@@ -157,8 +153,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Cargo Command.clean" />
         <item itemvalue="Cargo Command.run" />
+        <item itemvalue="Cargo Command.clean" />
         <item itemvalue="Cargo Command.run" />
         <item itemvalue="Cargo Command.run" />
         <item itemvalue="Cargo Command.run" />
@@ -188,8 +184,17 @@
       <workItem from="1568244115289" duration="4193000" />
       <workItem from="1568465710492" duration="35000" />
       <workItem from="1568465800256" duration="2042000" />
-      <workItem from="1568474476626" duration="2617000" />
+      <workItem from="1568474476626" duration="3409000" />
+      <workItem from="1568681796138" duration="5811000" />
     </task>
+    <task id="LOCAL-00001" summary="Can create a Window on both Windows OS and Linux now.">
+      <created>1568477262032</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568477262032</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,5 +212,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Can create a Window on both Windows OS and Linux now." />
+    <option name="LAST_COMMIT_MESSAGE" value="Can create a Window on both Windows OS and Linux now." />
   </component>
 </project>

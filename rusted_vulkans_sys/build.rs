@@ -50,7 +50,8 @@ fn main() {
             .disable_untagged_union()
             .derive_debug(false)
             .clang_arg(format!("-I{}", vulkan_include.into_os_string().to_str().unwrap()))
-            .raw_line("use winapi::shared::minwindef::*;");
+//            .raw_line("use winapi::shared::minwindef::*;")
+        ;
     }
     
     let bindings = builder.generate()

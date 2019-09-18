@@ -23,6 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/rusted_vulkans_sys\target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/windower\target" />
+      <excludeFolder url="file://$MODULE_DIR$/../gui\target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

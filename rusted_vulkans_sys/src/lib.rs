@@ -9,8 +9,6 @@
 
 #[cfg(windows)]
 extern crate winapi;
-use winapi::um::winnt::*;
-use winapi::shared::minwindef::*;
 
 use std::process::{self, Termination};
 
