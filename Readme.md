@@ -1,10 +1,11 @@
-##To build:
+## To build:
 
 ```$bash
 $ ./build.sh
 ```
 
-###Cargo Run Example
+### Cargo Run Example
 ```$bash
 $ cargo run --example basic_window
 ```
+
