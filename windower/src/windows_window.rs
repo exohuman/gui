@@ -67,7 +67,7 @@ impl WindowsWindow {
             cbSize: mem::size_of::<WNDCLASSEXW>() as u32
         };
 
-        let registration = unsafe {
+        let _registration = unsafe {
             let wnd_class_ptr: *const WNDCLASSEXW = &wnd_class;
             if RegisterClassExW(wnd_class_ptr) <= 0 {
                 exit_on_error(application_name.as_ptr(), wtext("Cannot register window").as_ptr());
@@ -106,11 +106,13 @@ impl WindowsWindow {
     }
 
     fn show_windows_window(&self) -> String {
+        (self.config.on_pre_show)();
         unsafe {
             ShowWindow(self.window_handle, SW_SHOW);
             SetForegroundWindow(self.window_handle);
             SetForegroundWindow(self.window_handle);
         };
+        (self.config.on_post_show)();
         String::new()
     }
 
@@ -120,7 +122,9 @@ impl WindowsWindow {
             loop {
                 if GetMessageW(&mut message as *mut MSG, self.window_handle, 0, 0) > 0 {
                     TranslateMessage(&message as *const MSG);
+                    (self.config.on_pre_render)();
                     DispatchMessageW(&message as *const MSG);
+                    (self.config.on_post_render)();
                 }
                 else {
                     break;
@@ -146,18 +150,16 @@ impl Window for WindowsWindow {
     }
 
     fn show(&self) -> String {
-        self.show_windows_window();
-        String::from("done")
+        self.show_windows_window()
     }
 
     fn render_loop(&self) {
-        self.render_loop_windows();
+        self.render_loop_windows()
     }
 }
 
 
 pub unsafe extern "system" fn window_proc(h_wnd: HWND, message: UINT, w_param: WPARAM, l_param: LPARAM) -> LRESULT {
-    println!("start window_proc");
     match message {
         WM_DESTROY => {
             println!("WM_DESTROY");
@@ -175,7 +177,6 @@ pub unsafe extern "system" fn window_proc(h_wnd: HWND, message: UINT, w_param: W
         }
     };
     let result = DefWindowProcW(h_wnd, message, w_param, l_param);
-    println!("end window_proc");
     result
 }
 

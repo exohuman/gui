@@ -6,8 +6,13 @@ pub fn start_demo() {
         width: 640, 
         height: 480,
         default_bg_color: 0,
-        title: "demo",
-        application_name: "demo",
+        title: "demo\0",
+        application_name: "demo\0",
+        on_create: || (),
+        on_pre_show: || (),
+        on_post_show: || (),
+        on_pre_render: || (),
+        on_post_render: || (),
     });
     window.show();
     window.render_loop();

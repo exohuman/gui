@@ -1,3 +1,8 @@
+
+pub type WindowOnCreateFnPtr = fn () -> ();
+pub type WindowOnShowFnPtr = fn () -> ();
+pub type WindowOnRenderFnPtr = fn () -> ();
+
 #[allow(dead_code)]
 #[derive(Copy,Clone)]
 pub struct WindowConfig {
@@ -6,6 +11,11 @@ pub struct WindowConfig {
     pub default_bg_color: u32,
     pub application_name: &'static str,
     pub title: &'static str,
+    pub on_create: WindowOnCreateFnPtr,
+    pub on_pre_show: WindowOnShowFnPtr,
+    pub on_post_show: WindowOnShowFnPtr,
+    pub on_pre_render: WindowOnRenderFnPtr,
+    pub on_post_render: WindowOnRenderFnPtr,
 }
 
 
@@ -15,5 +25,4 @@ pub trait Window {
     fn show(&self) -> String;
     fn render_loop(&self);
 }
-
 
