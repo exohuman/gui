@@ -42,21 +42,23 @@ fn main() {
     let mut builder = bindgen::Builder::default()
         .header("wrapper.h");
 
+    builder = builder
+            .disable_untagged_union()
+            .derive_debug(false);
+
     #[cfg(windows)] {
         let (_, _, vulkan_include, _) = get_library_paths();
 
         builder = builder
             // .rust_target(bindgen::RustTarget::Stable_1_33)
-            .disable_untagged_union()
-            .derive_debug(false)
+            //.disable_untagged_union()
+            //.derive_debug(false)
             .clang_arg(format!("-I{}", vulkan_include.into_os_string().to_str().unwrap()))
 //            .raw_line("use winapi::shared::minwindef::*;")
         ;
     }
     
     let bindings = builder.generate()
-        .disable_untagged_union()
-        .derive_debug(false)
         .expect("Unable to generate bindings");
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
