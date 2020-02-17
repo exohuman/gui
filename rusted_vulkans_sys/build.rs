@@ -55,6 +55,8 @@ fn main() {
     }
     
     let bindings = builder.generate()
+        .disable_untagged_union()
+        .derive_debug(false)
         .expect("Unable to generate bindings");
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
