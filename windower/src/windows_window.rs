@@ -7,7 +7,7 @@ use std::convert::TryInto;
 #[cfg(windows)]
 use winapi;
 
-use winapi::shared::minwindef::{LRESULT, WPARAM, LPARAM, UINT, HINSTANCE, WORD};
+use winapi::shared::minwindef::{LRESULT, WPARAM, LPARAM, UINT, HINSTANCE, WORD, BOOL};
 use winapi::shared::windef::{HWND, POINT, PSIZE, HBRUSH};
 
 use winapi::um::libloaderapi::{GetModuleHandleExW, GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS};
@@ -15,7 +15,14 @@ use winapi::um::wingdi::{BLACK_BRUSH, GetStockObject};
 use winapi::um::consoleapi::AllocConsole;
 use winapi::um::wincon::{AttachConsole, SetConsoleTitleW};
 use winapi::um::processthreadsapi::GetCurrentProcessId;
-use winapi::um::winuser::{DispatchMessageW, WNDCLASSEXW, CS_HREDRAW, CS_VREDRAW, WNDPROC, WM_PAINT, WM_SIZE, WM_DESTROY, IDC_ARROW, IDI_APPLICATION, LoadIconW, LoadCursorW, RegisterClassExW, PostQuitMessage, DefWindowProcW, DestroyWindow, ValidateRect, MAKEINTRESOURCEW, MessageBoxExW, MB_ICONERROR, GetSystemMetrics, SM_CXSCREEN, SM_CYSCREEN, CreateWindowExW, WS_OVERLAPPEDWINDOW, WS_CLIPSIBLINGS, WS_CLIPCHILDREN, WS_EX_OVERLAPPEDWINDOW, SW_SHOW, ShowWindow, SetForegroundWindow, MSG, TranslateMessage, GetMessageW};
+use winapi::um::winuser::{DispatchMessageW, WNDCLASSEXW, CS_HREDRAW, CS_VREDRAW, WNDPROC, 
+    WM_PAINT, WM_SIZE, WM_DESTROY, WM_CREATE, WM_QUIT,
+    IDC_ARROW, IDI_APPLICATION, LoadIconW, LoadCursorW, 
+    RegisterClassExW, PostQuitMessage, DefWindowProcW, DestroyWindow, ValidateRect, 
+    MAKEINTRESOURCEW, MessageBoxExW, MB_ICONERROR, GetSystemMetrics, SM_CXSCREEN, 
+    SM_CYSCREEN, CreateWindowExW, WS_OVERLAPPEDWINDOW, WS_CLIPSIBLINGS, WS_CLIPCHILDREN, 
+    WS_EX_OVERLAPPEDWINDOW, SW_SHOW, ShowWindow, SetForegroundWindow, MSG, LPMSG, TranslateMessage, 
+    PeekMessageW, GetMessageW, PM_REMOVE};
 use winapi::shared::ntdef::{MAKELANGID, LPCWSTR, LANG_NEUTRAL, SUBLANG_NEUTRAL};
 
 
@@ -110,7 +117,6 @@ impl WindowsWindow {
         unsafe {
             ShowWindow(self.window_handle, SW_SHOW);
             SetForegroundWindow(self.window_handle);
-            SetForegroundWindow(self.window_handle);
         };
         (self.config.on_post_show)();
         String::new()
@@ -120,14 +126,16 @@ impl WindowsWindow {
         unsafe {
             let mut message: MSG = mem::zeroed();
             loop {
-                if GetMessageW(&mut message as *mut MSG, self.window_handle, 0, 0) > 0 {
-                    TranslateMessage(&message as *const MSG);
-                    (self.config.on_pre_render)();
-                    DispatchMessageW(&message as *const MSG);
-                    (self.config.on_post_render)();
+                PeekMessageW(&mut message as *mut MSG, 0 as HWND, 0, 0, PM_REMOVE);
+                if message.message == WM_QUIT {
+                    println!("The program is exiting...");
+                    break;
                 }
                 else {
-                    break;
+                    (self.config.on_pre_render)();
+                    (self.config.on_post_render)();
+                    TranslateMessage(&message as *const MSG);
+                    DispatchMessageW(&message as *const MSG);
                 }
             }
         }
@@ -161,14 +169,16 @@ impl Window for WindowsWindow {
 
 pub unsafe extern "system" fn window_proc(h_wnd: HWND, message: UINT, w_param: WPARAM, l_param: LPARAM) -> LRESULT {
     match message {
+        WM_CREATE => {
+            println!("WM_CREATE");
+        },
         WM_DESTROY => {
             println!("WM_DESTROY");
-            DestroyWindow(h_wnd);
+            // DestroyWindow(h_wnd);
             PostQuitMessage(0);
         },
         WM_PAINT => {
             ValidateRect(h_wnd, ptr::null());
-            println!("WM_PAINT");
         },
         WM_SIZE => {
             println!("WM_SIZE");

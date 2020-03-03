@@ -10,11 +10,17 @@
 pub mod function_pointers;
 pub mod constants;
 pub mod structures;
+#[macro_use]
+pub mod macros;
 
 pub use constants::*;
 pub use structures::*;
 pub use function_pointers::*;
 
+#[macro_use]
+pub use macros::*;
+
+use std::ffi::{CString};
 
 //
 // Command Function Pointers and Instances
@@ -42,7 +48,6 @@ extern "C" {
     pub fn vkDestroyInstance(instance: VkInstance, pAllocator: *const VkAllocationCallbacks);
 }
 
-/*
 #[cfg(test)]
 mod tests {
 
@@ -60,7 +65,6 @@ mod tests {
         app_info: Option<VkApplicationInfo>,
         create_info: Option<VkInstanceCreateInfo>,
     }
-
 
     fn get_extensions() -> Vec<*const c_char> {
         let mut enabled_extensions = vec!(CStr::from_bytes_with_nul(VK_KHR_SURFACE_EXTENSION_NAME).unwrap().as_ptr());
@@ -83,7 +87,7 @@ mod tests {
         unsafe { vkDestroyInstance(example.instance.unwrap(), ptr::null()) };
     }
 
-
+/*
     #[test]
     fn can_initialize_vulkan() {
         let extensions = get_extensions();
@@ -92,7 +96,7 @@ mod tests {
             pNext: ptr::null(),
             pApplicationName: application_name.as_ptr() as *const c_char,
             pEngineName: engine_name.as_ptr() as *const c_char,
-            apiVersion: vk_make_version!(1, 0, 3),
+            apiVersion: vk_make_version!(1; 0; 3),
             applicationVersion: 1,
             engineVersion: 1,
         };

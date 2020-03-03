@@ -5,8 +5,11 @@
 #![allow(unused_macros)]
 #![feature(process_exitcode_placeholder)]
 #![feature(termination_trait_lib)]
+#![feature(const_str_as_bytes)]
 
 use super::structures::*;
+use std::ffi::{CStr};
+
 
 pub const VULKAN_VERSION: &str = "1.1";
 
@@ -2037,3 +2040,8 @@ pub const VkStencilFaceFlagBits_VK_STENCIL_FACE_FLAG_BITS_MAX_ENUM: VkStencilFac
     2147483647;
 pub type VkStencilFaceFlagBits = i32;
 pub type VkStencilFaceFlags = VkFlags;
+
+pub const VK_KHR_SURFACE_EXTENSION_NAME: &[u8] = b"VK_KR_surface\0";
+
+#[cfg(windows)]
+pub const VK_KHR_WIN32_SURFACE_EXTENSION_NAME: &[u8] = b"VK_KHR_win32_surface\0";

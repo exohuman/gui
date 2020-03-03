@@ -10,6 +10,7 @@ extern crate xcb;
 extern crate winapi;
 
 pub mod window;
+pub mod input;
 
 #[cfg(unix)]
 pub mod linux_window;

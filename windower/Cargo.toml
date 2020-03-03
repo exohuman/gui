@@ -13,4 +13,4 @@ edition = "2018"
 xcb = "0.8"
 
 [target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = ["winuser", "winnt", "wingdi", "commdlg", "minwindef"] }
+winapi = { version = "0.3", features = ["winuser", "libloaderapi", "winnt", "wingdi", "commdlg", "winbase", "commctrl", "consoleapi"] }
